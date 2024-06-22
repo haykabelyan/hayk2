@@ -1,4 +1,4 @@
-name: Python autotests2
+name: Python autotests
 
 on: 
    workflow_dispatch:
@@ -52,10 +52,10 @@ jobs:
            java-version: '17'
       - name: Install Allure
         run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz && sudo tar -zxvf allure-2.24.1.tgz -C /opt/ && sudo ln -s /opt/allure-2.24.1/bin/allure /usr/bin/allure
+      - name: Executor And Categories ADD in Reports
+        run: cp -r executor.json categories.json allure-results/
       - name: Generate report
         run: allure generate -c allure-results -o allure-report
-      - name: Copy Executor And Categories
-        run: cp -r executor.json categories.json allure-report/
       - name: Save allure report
         uses: actions/upload-artifact@v3
         with:
